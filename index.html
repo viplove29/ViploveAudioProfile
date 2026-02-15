@@ -11,26 +11,77 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+
+/* ===== Animated Background ===== */
 body{
-  background:#0b0f14;
-  color:#e6edf3;
+  margin:0;
   font-family:monospace;
+  color:#e6edf3;
+  background:linear-gradient(-45deg,#0b0f14,#111827,#0b0f14,#0f172a);
+  background-size:400% 400%;
+  animation:gradientMove 12s ease infinite;
+  overflow-x:hidden;
 }
 
+@keyframes gradientMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Floating glow orbs */
+body::before{
+  content:"";
+  position:fixed;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,#00ff8840 0%,transparent 70%);
+  top:-150px;
+  left:-150px;
+  animation:float 12s infinite alternate ease-in-out;
+  z-index:-1;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  background:radial-gradient(circle,#00ffff30 0%,transparent 70%);
+  bottom:-150px;
+  right:-150px;
+  animation:float 16s infinite alternate ease-in-out;
+  z-index:-1;
+}
+
+@keyframes float{
+  from{transform:translateY(0px);}
+  to{transform:translateY(60px);}
+}
+
+/* Cards */
 .card{
-  background:#111827;
+  background:rgba(17,24,39,0.85);
+  backdrop-filter:blur(10px);
   border-radius:12px;
   padding:20px;
   box-shadow:0 8px 30px rgba(0,0,0,.5);
   margin-bottom:20px;
+  transition:.3s;
 }
 
+.card:hover{
+  box-shadow:0 0 25px #00ff8840;
+}
+
+/* Timeline */
 .timeline-item{
   border-left:2px solid #00ff88;
   padding-left:14px;
   margin-bottom:18px;
 }
 
+/* Projects */
 .project{
   transition:.3s;
 }
@@ -39,15 +90,18 @@ body{
   box-shadow:0 0 20px #00ff8850;
 }
 
+/* Icons */
 .icon{
   font-size:20px;
   margin-right:14px;
   cursor:pointer;
+  transition:.3s;
 }
 .icon:hover{
   color:#00ff88;
 }
 
+/* Chat */
 #chatbox{
   position:fixed;
   bottom:20px;
@@ -58,6 +112,7 @@ body{
   border-radius:10px;
   display:none;
 }
+
 </style>
 </head>
 
@@ -115,64 +170,24 @@ class="ml-3 bg-red-500 px-4 py-2 rounded text-black font-bold">
 
 <div class="timeline-item">
 <b>Principal Engineer — Ascendion (2025–Present)</b>
-<p>
-QE Circle team, AAVA platform, HP QAMA framework automation running from Linux
-connecting to Windows, mobile devices, macOS and iOS environments.
-Led team of 20+ engineers and automated 100+ test cases weekly.
-</p>
+<p>Leading Agentic QA initiatives using AAVA and HP QAMA framework across cross-platform ecosystems.</p>
 </div>
 
 <div class="timeline-item">
 <b>Technical Lead SDET — Vertafore (2021–2025)</b>
-<p>
-Automation strategy using Playwright, Selenium, Serenity BDD and CI/CD pipelines.
-Mentored QA engineers transitioning into automation roles.
-</p>
+<p>Automation strategy, Playwright architecture, CI/CD integration and QA mentorship.</p>
 </div>
 
 <div class="timeline-item">
 <b>Senior QA Analyst — Wells Fargo (2016–2021)</b>
-<p>
-Selenium automation, Jenkins pipelines, SQL validation and CRM testing.
-</p>
+<p>Selenium automation, Jenkins pipelines and database validation.</p>
 </div>
 
 <div class="timeline-item">
 <b>Systems Engineer — TCS (2014–2016)</b>
-<p>
-Xerox enterprise automation, integration testing and mobile automation.
-</p>
+<p>Enterprise automation and integration testing.</p>
 </div>
 
-</div>
-
-<!-- ENTERPRISE PROJECTS -->
-<div class="card">
-<h2 class="text-xl mb-4">Enterprise Projects</h2>
-
-<div class="grid md:grid-cols-2 gap-4">
-
-<div class="project card">
-<h3>DICK’S Sporting Goods</h3>
-<p>Agentic mobile automation using Espresso and XCUITest.</p>
-</div>
-
-<div class="project card">
-<h3>Santander Bank</h3>
-<p>End-to-end SDLC automation using AAVA orchestration.</p>
-</div>
-
-<div class="project card">
-<h3>HP QAMA Framework</h3>
-<p>Linux orchestration framework executing cross-platform automation.</p>
-</div>
-
-<div class="project card">
-<h3>Endpoint Clinical</h3>
-<p>AI-assisted Playwright MCP automation POC.</p>
-</div>
-
-</div>
 </div>
 
 <!-- GITHUB PROJECTS -->
@@ -183,13 +198,26 @@ Xerox enterprise automation, integration testing and mobile automation.
 
 </div>
 
-<!-- RESUME VIEWER -->
+<!-- RESUME MODAL -->
 <div id="resumeModal"
-style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;">
-<iframe src="resume.pdf" style="width:100%;height:100%;"></iframe>
+style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.95);z-index:9999;">
+
+<button onclick="closeResume()"
+style="position:absolute;top:20px;right:30px;
+background:#00ff88;padding:10px;border:none;
+font-weight:bold;cursor:pointer;">
+Close
+</button>
+
+<iframe
+src="https://viplove29.github.io/ViploveAudioProfile/resume.pdf"
+style="width:100%;height:100%;border:none;">
+</iframe>
+
 </div>
 
-<!-- CHATBOT -->
+<!-- CHAT -->
 <div id="chatbox">
 <div class="p-2 border-b border-green-400">Portfolio Assistant</div>
 <div id="chatlog" class="p-2 text-sm h-40 overflow-y-auto"></div>
@@ -204,9 +232,10 @@ AI
 </button>
 
 <script>
+
 /* typing intro */
 const intro = `Hello, I'm Viplove Bisen.
-QE Architect building Agentic QA platforms using AAVA and HP QAMA.
+QE Architect building Agentic QA platforms.
 Principal Engineer with 12+ years in automation engineering.`;
 
 let i=0;
@@ -218,33 +247,9 @@ setTimeout(type,15);
 }}
 type();
 
-/* speech resume */
+/* speech */
 function speakResume(){
-const text = `
-Hello, I am Viplove Bisen.
-
-I am a Quality Engineering Architect and Principal Engineer
-with over decade of experience transforming enterprise QA ecosystems.
-
-I don’t just build automation frameworks —
-I design scalable quality platforms that enable intelligent,
-agent-driven testing across complex systems.
-
-Currently at Ascendion, I lead automation innovation
-through the AAVA Agentic QA platform and the HP QAMA orchestration framework,
-delivering cross-platform automation across Linux, Windows, mobile, and cloud environments.
-
-Throughout my career at organizations like Wells Fargo,
-Vertafore, and TCS, I have built CI/CD-integrated automation solutions,
-mentored engineering teams, and driven quality transformation initiatives
-that reduced release cycles and improved reliability at scale.
-
-My focus today is evolving QA into autonomous,
-AI-assisted quality engineering ecosystems —
-where testing is not reactive, but predictive and strategic.
-
-Welcome to my portfolio.
-`;
+const text = `Hello, I am Viplove Bisen, Quality Engineering Architect and Principal Engineer with over twelve years of enterprise automation experience. I design scalable, AI-driven QA platforms using AAVA and HP QAMA frameworks, transforming quality engineering into autonomous, strategic systems. Welcome to my portfolio.`;
 
 const speech = new SpeechSynthesisUtterance(text);
 speech.rate = 0.95;
@@ -267,6 +272,9 @@ document.getElementById("repos").innerHTML=html;
 function openResume(){
 document.getElementById("resumeModal").style.display="block";
 }
+function closeResume(){
+document.getElementById("resumeModal").style.display="none";
+}
 
 /* chatbot */
 function toggleChat(){
@@ -279,9 +287,9 @@ if(e.key==="Enter"){
 let input=e.target.value.toLowerCase();
 let res="Ask about experience, skills, or projects.";
 
-if(input.includes("experience")) res="12+ years in QA automation.";
+if(input.includes("experience")) res="12+ years in enterprise QA automation.";
 if(input.includes("skills")) res="Agentic QA, Selenium, Playwright, CI/CD.";
-if(input.includes("aava")) res="AAVA is Ascendion's agentic QA platform.";
+if(input.includes("aava")) res="AAVA is Ascendion's Agentic QA platform.";
 if(input.includes("qama")) res="HP QAMA is a Linux-based automation orchestration framework.";
 
 document.getElementById("chatlog").innerHTML+="<div>> "+res+"</div>";
