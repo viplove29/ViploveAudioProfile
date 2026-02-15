@@ -207,7 +207,7 @@ AI
 /* typing intro */
 const intro = `Hello, I'm Viplove Bisen.
 QE Architect building Agentic QA platforms using AAVA and HP QAMA.
-Principal Engineer with 11+ years in automation engineering.`;
+Principal Engineer with 12+ years in automation engineering.`;
 
 let i=0;
 function type(){
@@ -221,10 +221,29 @@ type();
 /* speech resume */
 function speakResume(){
 const text = `
-Hello, I am Viplove Bisen, QE Architect and Principal Engineer.
-I build agentic QA platforms using AAVA and HP QAMA frameworks.
-I have over tweleve years of experience in automation engineering,
-enterprise testing, and CI CD integration.
+Hello, I am Viplove Bisen.
+
+I am a Quality Engineering Architect and Principal Engineer
+with over decade of experience transforming enterprise QA ecosystems.
+
+I don’t just build automation frameworks —
+I design scalable quality platforms that enable intelligent,
+agent-driven testing across complex systems.
+
+Currently at Ascendion, I lead automation innovation
+through the AAVA Agentic QA platform and the HP QAMA orchestration framework,
+delivering cross-platform automation across Linux, Windows, mobile, and cloud environments.
+
+Throughout my career at organizations like Wells Fargo,
+Vertafore, and TCS, I have built CI/CD-integrated automation solutions,
+mentored engineering teams, and driven quality transformation initiatives
+that reduced release cycles and improved reliability at scale.
+
+My focus today is evolving QA into autonomous,
+AI-assisted quality engineering ecosystems —
+where testing is not reactive, but predictive and strategic.
+
+Welcome to my portfolio.
 `;
 
 const speech = new SpeechSynthesisUtterance(text);
@@ -260,7 +279,7 @@ if(e.key==="Enter"){
 let input=e.target.value.toLowerCase();
 let res="Ask about experience, skills, or projects.";
 
-if(input.includes("experience")) res="11+ years in QA automation.";
+if(input.includes("experience")) res="12+ years in QA automation.";
 if(input.includes("skills")) res="Agentic QA, Selenium, Playwright, CI/CD.";
 if(input.includes("aava")) res="AAVA is Ascendion's agentic QA platform.";
 if(input.includes("qama")) res="HP QAMA is a Linux-based automation orchestration framework.";
