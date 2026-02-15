@@ -6,11 +6,12 @@
 <title>Viplove Bisen | QE Architect</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body {
+body{
   background:#0b0f14;
   color:#e6edf3;
   font-family:monospace;
@@ -24,14 +25,12 @@ body {
   margin-bottom:20px;
 }
 
-/* timeline */
 .timeline-item{
   border-left:2px solid #00ff88;
   padding-left:14px;
   margin-bottom:18px;
 }
 
-/* project cards */
 .project{
   transition:.3s;
 }
@@ -40,7 +39,15 @@ body {
   box-shadow:0 0 20px #00ff8850;
 }
 
-/* chatbot */
+.icon{
+  font-size:20px;
+  margin-right:14px;
+  cursor:pointer;
+}
+.icon:hover{
+  color:#00ff88;
+}
+
 #chatbox{
   position:fixed;
   bottom:20px;
@@ -59,56 +66,87 @@ body {
 
 <!-- HEADER -->
 <div class="card flex gap-6 items-center">
-<img src="profile.jpg" class="w-24 h-24 rounded-full">
+<img src="profile.jpg"
+class="w-24 h-24 rounded-full border-2 border-green-400">
+
 <div>
 <h1 class="text-3xl font-bold">Viplove Bisen</h1>
 <p>QE Architect • Principal Engineer • Agentic QA</p>
 
-<div class="mt-2">
-<i class="fab fa-github cursor-pointer mr-3"
+<div class="mt-3">
+<i class="fab fa-github icon"
 onclick="window.open('https://github.com/viplove29')"></i>
 
-<i class="fab fa-linkedin cursor-pointer mr-3"
+<i class="fab fa-linkedin icon"
 onclick="window.open('https://linkedin.com/in/viplove-bisen-8719ab164')"></i>
 
-<i class="fas fa-file cursor-pointer"
+<i class="fab fa-youtube icon"
+onclick="window.open('https://www.youtube.com/@Viplove_QA_SDET')"></i>
+
+<i class="fas fa-file icon"
 onclick="openResume()"></i>
 </div>
 </div>
 </div>
 
-<!-- TERMINAL -->
+<!-- TERMINAL INTRO -->
 <div class="card">
 <div id="typing"></div>
 </div>
 
-<!-- EXPERIENCE TIMELINE -->
+<!-- AUDIO RESUME -->
+<div class="card">
+<h2 class="text-xl mb-3">Audio Resume</h2>
+
+<button onclick="speakResume()"
+class="bg-green-500 px-4 py-2 rounded text-black font-bold">
+▶ Listen to Resume
+</button>
+
+<button onclick="speechSynthesis.cancel()"
+class="ml-3 bg-red-500 px-4 py-2 rounded text-black font-bold">
+■ Stop
+</button>
+</div>
+
+<!-- EXPERIENCE -->
 <div class="card">
 <h2 class="text-xl mb-4">Experience</h2>
 
 <div class="timeline-item">
 <b>Principal Engineer — Ascendion (2025–Present)</b>
-<p>QE Circle, AAVA platform, HP QAMA framework, Agentic QA POCs.</p>
+<p>
+QE Circle team, AAVA platform, HP QAMA framework automation running from Linux
+connecting to Windows, mobile devices, macOS and iOS environments.
+Led team of 20+ engineers and automated 100+ test cases weekly.
+</p>
 </div>
 
 <div class="timeline-item">
 <b>Technical Lead SDET — Vertafore (2021–2025)</b>
-<p>Playwright automation strategy, CI/CD pipelines, mentoring QA engineers.</p>
+<p>
+Automation strategy using Playwright, Selenium, Serenity BDD and CI/CD pipelines.
+Mentored QA engineers transitioning into automation roles.
+</p>
 </div>
 
 <div class="timeline-item">
 <b>Senior QA Analyst — Wells Fargo (2016–2021)</b>
-<p>Selenium automation, Jenkins CI, database testing.</p>
+<p>
+Selenium automation, Jenkins pipelines, SQL validation and CRM testing.
+</p>
 </div>
 
 <div class="timeline-item">
 <b>Systems Engineer — TCS (2014–2016)</b>
-<p>Xerox automation and integration testing.</p>
+<p>
+Xerox enterprise automation, integration testing and mobile automation.
+</p>
 </div>
 
 </div>
 
-<!-- PROJECT CARDS -->
+<!-- ENTERPRISE PROJECTS -->
 <div class="card">
 <h2 class="text-xl mb-4">Enterprise Projects</h2>
 
@@ -116,31 +154,31 @@ onclick="openResume()"></i>
 
 <div class="project card">
 <h3>DICK’S Sporting Goods</h3>
-<p>Agentic mobile automation using Espresso & XCUITest.</p>
+<p>Agentic mobile automation using Espresso and XCUITest.</p>
 </div>
 
 <div class="project card">
 <h3>Santander Bank</h3>
-<p>End-to-end SDLC automation using AAVA.</p>
+<p>End-to-end SDLC automation using AAVA orchestration.</p>
 </div>
 
 <div class="project card">
 <h3>HP QAMA Framework</h3>
-<p>Linux orchestration framework controlling cross-platform automation.</p>
+<p>Linux orchestration framework executing cross-platform automation.</p>
 </div>
 
 <div class="project card">
 <h3>Endpoint Clinical</h3>
-<p>AI-assisted Playwright MCP automation.</p>
+<p>AI-assisted Playwright MCP automation POC.</p>
 </div>
 
 </div>
 </div>
 
-<!-- GITHUB PROJECT LOADER -->
+<!-- GITHUB PROJECTS -->
 <div class="card">
 <h2 class="text-xl mb-4">GitHub Projects</h2>
-<div id="repos"></div>
+<div id="repos">Loading repositories...</div>
 </div>
 
 </div>
@@ -167,9 +205,10 @@ AI
 
 <script>
 /* typing intro */
-const intro=`Hello, I'm Viplove Bisen.
+const intro = `Hello, I'm Viplove Bisen.
 QE Architect building Agentic QA platforms using AAVA and HP QAMA.
-Leading automation transformation across enterprise clients.`;
+Principal Engineer with 11+ years in automation engineering.`;
+
 let i=0;
 function type(){
 if(i<intro.length){
@@ -179,13 +218,28 @@ setTimeout(type,15);
 }}
 type();
 
+/* speech resume */
+function speakResume(){
+const text = `
+Hello, I am Viplove Bisen, QE Architect and Principal Engineer.
+I build agentic QA platforms using AAVA and HP QAMA frameworks.
+I have over tweleve years of experience in automation engineering,
+enterprise testing, and CI CD integration.
+`;
+
+const speech = new SpeechSynthesisUtterance(text);
+speech.rate = 0.95;
+window.speechSynthesis.cancel();
+window.speechSynthesis.speak(speech);
+}
+
 /* github loader */
 fetch("https://api.github.com/users/viplove29/repos")
 .then(r=>r.json())
 .then(data=>{
 let html="";
-data.slice(0,4).forEach(repo=>{
-html+=`<div>${repo.name}</div>`;
+data.slice(0,5).forEach(repo=>{
+html+=`<div>• ${repo.name}</div>`;
 });
 document.getElementById("repos").innerHTML=html;
 });
@@ -205,9 +259,12 @@ function chat(e){
 if(e.key==="Enter"){
 let input=e.target.value.toLowerCase();
 let res="Ask about experience, skills, or projects.";
+
 if(input.includes("experience")) res="11+ years in QA automation.";
-if(input.includes("skills")) res="Automation architecture, AI QA, Selenium, Playwright.";
+if(input.includes("skills")) res="Agentic QA, Selenium, Playwright, CI/CD.";
 if(input.includes("aava")) res="AAVA is Ascendion's agentic QA platform.";
+if(input.includes("qama")) res="HP QAMA is a Linux-based automation orchestration framework.";
+
 document.getElementById("chatlog").innerHTML+="<div>> "+res+"</div>";
 e.target.value="";
 }}
