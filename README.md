@@ -22,7 +22,7 @@ Currently working as **Principal Engineer at Ascendion**, leading large-scale au
 ## 🎧 Interactive Portfolio
 
 🌐 Live Portfolio:  
-👉 **https://viplove29.github.io**
+👉 **[https://viplove29.github.io](https://viplove29.github.io/ViploveAudioProfile/)**
 
 Features:
 - 🗣 Speech-based resume (browser-powered voice intro)
