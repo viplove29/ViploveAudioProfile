@@ -30,7 +30,7 @@ Includes:
 
 I specialize in building **automation platforms, not just test scripts**.
 
-With **11+ years of experience**, I’ve led QA transformation across:
+With **12+ years of experience**, I’ve led QA transformation across:
 
 - Banking
 - Insurance
